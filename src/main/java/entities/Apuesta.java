@@ -2,9 +2,11 @@ package entities;
 
 import enums.Resultado;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -22,4 +24,9 @@ public class Apuesta {
     private Resultado resultado;
 
     private double gananciaCalculada;
+
+    @ManyToOne
+    @JoinColumn(name ="usuario_id")
+    private Usuario usuario;
+
 }

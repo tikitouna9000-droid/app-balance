@@ -2,13 +2,17 @@ package service.impl;
 
 import entities.Apuesta;
 import enums.Resultado;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import repository.ApuestaRepository;
 import service.IApuestaService;
 
 import java.util.List;
-
+@Service
 public class ApuestaService implements IApuestaService {
 
-
+    @Autowired
+    private ApuestaRepository apuestaRepository;
 
     @Override
     public Apuesta getApuesta(Long id) {
