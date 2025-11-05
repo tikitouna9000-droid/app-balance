@@ -1,15 +1,23 @@
 package service.impl;
 
 import entities.Apuesta;
+import entities.Usuario;
 import enums.Resultado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.ApuestaRepository;
+import repository.UsuarioRepository;
 import service.IApuestaService;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class ApuestaService implements IApuestaService {
+
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @Autowired
     private ApuestaRepository apuestaRepository;
@@ -20,8 +28,16 @@ public class ApuestaService implements IApuestaService {
     }
 
     @Override
+    public Apuesta crearApuesta(Long idUsuario, Apuesta nuevaApuesta) {
+        Usuario usuarioEncontrado = usuarioRepository.findById(idUsuario).orElseThrow(() -> new RuntimeException("usuario no encontrado"));
+        nuevaApuesta.setUsuario(usuarioEncontrado);
+        return apuestaRepository.save(nuevaApuesta);
+
+    }
+
+    @Override
     public List<Apuesta> getApuestasUsuario(Long idUsuario) {
-        return List.of();
+        return apuestaRepository.findByUsuarioId(idUsuario);
     }
 
     @Override
