@@ -16,7 +16,7 @@ public class Apuesta {
     @GeneratedValue
     private Long id;
 
-    private int montoApostado;
+    private double montoApostado;
 
     private double multiplier;
 
