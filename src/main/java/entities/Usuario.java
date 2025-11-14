@@ -20,6 +20,8 @@ public class Usuario {
 
     private String email;
 
+    private String password;
+
     @OneToMany(mappedBy = "usuario")
     private List<Apuesta> apuesta;
 }
