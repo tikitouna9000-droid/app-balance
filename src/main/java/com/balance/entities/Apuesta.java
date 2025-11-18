@@ -1,6 +1,6 @@
-package entities;
+package com.balance.entities;
 
-import enums.Resultado;
+import com.balance.enums.Resultado;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,6 +24,8 @@ public class Apuesta {
     private Resultado resultado;
 
     private double gananciaCalculada;
+
+    private String descripcion;
 
     @ManyToOne
     @JoinColumn(name ="usuario_id")

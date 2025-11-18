@@ -1,4 +1,4 @@
-package dto;
+package com.balance.dto;
 
 import lombok.Getter;
 import lombok.Setter;

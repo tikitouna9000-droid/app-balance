@@ -1,6 +1,6 @@
-package service;
+package com.balance.service;
 
-import entities.Apuesta;
+import com.balance.entities.Apuesta;
 
 
 import java.util.List;

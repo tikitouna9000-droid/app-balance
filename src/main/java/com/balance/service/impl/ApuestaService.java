@@ -1,16 +1,15 @@
-package service.impl;
+package com.balance.service.impl;
 
-import entities.Apuesta;
-import entities.Usuario;
-import enums.Resultado;
+import com.balance.entities.Apuesta;
+import com.balance.entities.Usuario;
+import com.balance.enums.Resultado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repository.ApuestaRepository;
-import repository.UsuarioRepository;
-import service.IApuestaService;
+import com.balance.repository.ApuestaRepository;
+import com.balance.repository.UsuarioRepository;
+import com.balance.service.IApuestaService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ApuestaService implements IApuestaService {

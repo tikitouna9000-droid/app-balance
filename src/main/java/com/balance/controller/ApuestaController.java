@@ -1,12 +1,12 @@
-package controller;
+package com.balance.controller;
 
-import dto.ApuestaCreateDto;
-import entities.Apuesta;
-import mappers.ApuestaMapper;
+import com.balance.dto.ApuestaCreateDto;
+import com.balance.entities.Apuesta;
+import com.balance.mappers.ApuestaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import repository.ApuestaRepository;
-import service.IApuestaService;
+import com.balance.repository.ApuestaRepository;
+import com.balance.service.IApuestaService;
 
 @RestController
 @RequestMapping ("/api")
@@ -24,7 +24,7 @@ public class ApuestaController {
 
     @PostMapping("/usuarios/{idUsuario}/apuestas")
     public Apuesta crearApuesta(@PathVariable("idUsuario") Long idUsuario, @RequestBody ApuestaCreateDto apuestaDto){
-        Apuesta apuestaNormal = ApuestaMapper.toEntity(apuestaDto);
+        Apuesta apuestaNormal = ApuestaMapper.dtoApuesta(apuestaDto);
         return apuestaService.crearApuesta(idUsuario, apuestaNormal);
     }
 }
