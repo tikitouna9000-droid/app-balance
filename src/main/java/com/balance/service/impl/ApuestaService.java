@@ -23,7 +23,7 @@ public class ApuestaService implements IApuestaService {
 
     @Override
     public Apuesta getApuesta(Long id) {
-        return null;
+        return apuestaRepository.findById(id).orElseThrow(()-> new RuntimeException("La apuesta con id " + id + "no existe"));
     }
 
     @Override

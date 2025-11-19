@@ -1,6 +1,7 @@
 package com.balance.entities;
 
 import com.balance.enums.Resultado;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,6 +30,7 @@ public class Apuesta {
 
     @ManyToOne
     @JoinColumn(name ="usuario_id")
+    @JsonIgnore
     private Usuario usuario;
 
 }
