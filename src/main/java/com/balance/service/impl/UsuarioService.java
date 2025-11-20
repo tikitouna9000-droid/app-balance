@@ -2,6 +2,7 @@ package com.balance.service.impl;
 
 import com.balance.config.SecurityConfig;
 import com.balance.dto.UsuarioCreateDto;
+import com.balance.dto.UsuarioLoginDto;
 import com.balance.entities.Usuario;
 import com.balance.mappers.UsuarioMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,17 @@ public class UsuarioService implements IUsuarioService {
 
 
         return usuarioRepository.save(nuevoUsuario);
+    }
+
+    @Override
+    public Usuario login(UsuarioLoginDto dto) {
+        Usuario usuarioEncontrado = usuarioRepository.findByEmail(dto.getEmail()).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        if (!passwordEnco.passwordEncoder().matches(dto.getPassword(), usuarioEncontrado.getPassword())){
+            throw new RuntimeException("Credenciales incorrectas");
+        }
+
+        return usuarioEncontrado;
     }
 }
 

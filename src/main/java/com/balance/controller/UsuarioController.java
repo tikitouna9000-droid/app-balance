@@ -1,11 +1,14 @@
 package com.balance.controller;
 
 import com.balance.dto.UsuarioCreateDto;
+import com.balance.dto.UsuarioLoginDto;
 import com.balance.entities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.balance.repository.UsuarioRepository;
 import com.balance.service.IUsuarioService;
+
+
 
 @RestController
 @RequestMapping("/api/usuarios")
@@ -17,9 +20,15 @@ public class UsuarioController {
     private UsuarioRepository usuarioRepository;
 
 
-
     @PostMapping("/registro")
-    public Usuario crearUsuario(@RequestBody UsuarioCreateDto usarioDto){
-        return usuarioService.crearUsuario(usarioDto);
+    public Usuario crearUsuario(@RequestBody UsuarioCreateDto usuarioDto) {
+        return usuarioService.crearUsuario(usuarioDto);
     }
+
+
+    @PostMapping("/login")
+    public Usuario login(@RequestBody UsuarioLoginDto loginDto) {
+        return usuarioService.login(loginDto);
+    }
+
 }
