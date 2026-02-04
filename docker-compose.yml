@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  # Servicio 1: Tu Base de Datos MySQL
+  mysqldb:
+    image: mysql:8.0 # O la versión que prefieras
+    container_name: mi-mysql-container
+    ports:
+      - "3307:3306" # Mapea puerto 3307 de tu PC al 3306 del contenedor (para no chocar si tienes MySQL local)
+    environment:
+      MYSQL_DATABASE: apuestas
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - mysql-data:/var/lib/mysql # Esto evita que pierdas los datos al apagar el contenedor
+    restart: always
+
+  # Servicio 2: Tu App Spring Boot (Java 21)
+  app:
+    build: . # Construye la imagen usando el Dockerfile en este directorio
+    container_name: mi-app-springboot
+    ports:
+      - "8080:8080" # Tu app será accesible en localhost:8080
+    depends_on:
+      - mysqldb # Espera a que la DB inicie antes de arrancar la app
+    environment:
+      # AQUÍ ESTÁ LA MAGIA: Usamos el nombre del servicio 'mysqldb' como host
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/apuestas?allowPublicKeyRetrieval=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      # JPA / Hibernate settings (opcional, pero recomendado)
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    restart: on-failure
+
+volumes:
+  mysql-data:
